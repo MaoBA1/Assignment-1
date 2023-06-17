@@ -25,18 +25,16 @@ function App() {
   ];
   
   return (
-    <div className="App">
-      <Expenses expenses={expenses}>
-          {
-            expenses.map((item, index) => 
-              <ExpenseItem 
-                key={item.id}
-                expense={item}
-              />
-            )
-          }
-      </Expenses>
-    </div>
+    <Expenses expenses={expenses}>
+        {
+          expenses.map((item, index) => 
+            <ExpenseItem 
+              key={item.id}
+              expense={item}
+            />
+          )
+        }
+    </Expenses>
   );
 }
 

@@ -1,9 +1,10 @@
+import Card from './Card';
 import './ExpenseDate.css'
 
 function ExpensDate({ day, month, year }) {
     
     return (  
-        <div className="expense-date ">
+        <Card className="expense-date ">
             <div className="expense-date__day">
                 {day}
             </div>
@@ -13,7 +14,7 @@ function ExpensDate({ day, month, year }) {
             <div className="expense-date__year">
                 {year}
             </div>
-        </div>
+        </Card>
     );
 }
 
