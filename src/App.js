@@ -1,9 +1,10 @@
+import { useState } from "react";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
-  const expenses = [
+  const [expenses, setExpenses] = useState([
     {
       id: "e1",
       title: "Toilet Paper",
@@ -23,11 +24,26 @@ function App() {
       amount: 450,
       date: new Date(2021, 5, 12),
     },
-  ];
+  ]); 
+  
+
+  const newExpenseSubmitHandler = (newExpenseData) => {
+    setExpenses(prevExpenses => {
+      return [
+        ...prevExpenses,
+        {
+          ...newExpenseData,
+          title: newExpenseData.enteredTitle,
+          amount: newExpenseData.enteredAmount,
+          date: new Date(newExpenseData.enteredDate)
+        }
+      ]
+    })
+  }
 
   return (
     <>
-      <NewExpense/>
+      <NewExpense onNewExpenseSubmitted={newExpenseSubmitHandler}/>
       <Expenses expenses={expenses}>
         {expenses.map((item, index) => (
           <ExpenseItem key={item.id} expense={item} />
