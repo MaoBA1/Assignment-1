@@ -30,13 +30,13 @@ function App() {
   const newExpenseSubmitHandler = (newExpenseData) => {
     setExpenses(prevExpenses => {
       return [
-        ...prevExpenses,
         {
           ...newExpenseData,
           title: newExpenseData.enteredTitle,
           amount: newExpenseData.enteredAmount,
           date: new Date(newExpenseData.enteredDate)
-        }
+        },
+        ...prevExpenses
       ]
     })
   }
