@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ExpenseItem from "./components/Expenses/ExpenseItem";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
@@ -25,8 +24,7 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ]);
-  const [selectedYear, setSelectedYear] = useState(null);
-
+  
   const newExpenseSubmitHandler = (newExpenseData) => {
     setExpenses((prevExpenses) => {
       return [
@@ -41,25 +39,13 @@ function App() {
     });
   };
 
-  const expenseFilterHandler = (selectedYear) => {
-    setSelectedYear(selectedYear);
-  };
-
-  const filterExpenses = () => {
-    return selectedYear
-      ? expenses.filter(
-          (expense) => expense.date.getFullYear().toString() === selectedYear
-        )
-      : expenses;
-  };
+  
   return (
     <>
       <NewExpense onNewExpenseSubmitted={newExpenseSubmitHandler} />
-      <Expenses onYearSelect={expenseFilterHandler}>
-        {filterExpenses().map((item, index) => (
-          <ExpenseItem key={item.id} expense={item} />
-        ))}
-      </Expenses>
+      <Expenses 
+        expenses={expenses}
+      />
     </>
   );
 }
