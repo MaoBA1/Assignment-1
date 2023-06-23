@@ -24,28 +24,39 @@ function App() {
       amount: 450,
       date: new Date(2021, 5, 12),
     },
-  ]); 
-  
+  ]);
+  const [selectedYear, setSelectedYear] = useState(null);
 
   const newExpenseSubmitHandler = (newExpenseData) => {
-    setExpenses(prevExpenses => {
+    setExpenses((prevExpenses) => {
       return [
         {
           ...newExpenseData,
           title: newExpenseData.enteredTitle,
           amount: newExpenseData.enteredAmount,
-          date: new Date(newExpenseData.enteredDate)
+          date: new Date(newExpenseData.enteredDate),
         },
-        ...prevExpenses
-      ]
-    })
-  }
+        ...prevExpenses,
+      ];
+    });
+  };
 
+  const expenseFilterHandler = (selectedYear) => {
+    setSelectedYear(selectedYear);
+  };
+
+  const filterExpenses = () => {
+    return selectedYear
+      ? expenses.filter(
+          (expense) => expense.date.getFullYear().toString() === selectedYear
+        )
+      : expenses;
+  };
   return (
     <>
-      <NewExpense onNewExpenseSubmitted={newExpenseSubmitHandler}/>
-      <Expenses expenses={expenses}>
-        {expenses.map((item, index) => (
+      <NewExpense onNewExpenseSubmitted={newExpenseSubmitHandler} />
+      <Expenses onYearSelect={expenseFilterHandler}>
+        {filterExpenses().map((item, index) => (
           <ExpenseItem key={item.id} expense={item} />
         ))}
       </Expenses>
