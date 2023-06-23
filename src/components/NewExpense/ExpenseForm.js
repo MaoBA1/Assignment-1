@@ -7,7 +7,7 @@ function ExpenseForm(props) {
     enteredAmount: "",
     enteredDate: "",
   });
-
+  
   const onChangeExpenseData = (type, value) => {
     switch (type) {
       case "title":
@@ -47,7 +47,6 @@ function ExpenseForm(props) {
       enteredAmount: "",
       enteredDate: "",
     })
-
   };
 
   return (
@@ -91,6 +90,7 @@ function ExpenseForm(props) {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={props.onCancel}>cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
